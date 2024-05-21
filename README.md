@@ -16,10 +16,21 @@
 
     export default function Page() {
     return (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", margin: "30px" }}>
+        <div
+        style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "30px",
+        }}
+        >
         <Typography variant="p">Click it:</Typography>
-        <Button variant="contained" sx={{ marginLeft: "20px" }} onClick={() => alert("Yeah you did it!")}>
-            Just do it!
+        <Button
+            variant="contained"
+            sx={{ marginLeft: "20px", textTransform: "capitalize", fontSize: "1em" }}
+            onClick={() => alert("Yeah you did it!")}
+        >
+            Just do it
         </Button>
         </div>
     );
@@ -32,6 +43,58 @@
 
 7. You should see a button with the text "Just do it!". Click it and you should see an alert with the text "Yeah you did it!".
 
-8. You can now start building your app using MUI components.
+8. You can now change the button to a styled button by adding a styles.jsx file in the same folder as the page.jsx file.
+
+9. Add the following code to the `styles.jsx` file:
+
+    ```jsx
+    "use client";
+
+    import { styled } from "@mui/material/styles";
+    import Button from "@mui/material/Button";
+
+    const StyledButton = styled(Button)({
+        marginLeft: 20,
+        textTransform: "capitalize",
+        fontSize: "1em",
+        backgroundColor: "darkblue",
+    });
+
+    const StyledDiv = styled("div")({
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "30px",
+    });
+
+    export { StyledButton, StyledDiv };
+    ```
+
+10. Update the `page.jsx` file to use the styled components:
+
+    ```jsx
+    "use client";
+
+    import * as React from "react";
+    import { Button, Typography } from "@mui/material";
+
+    import { StyledButton, StyledDiv } from "./example.styles";
+
+    export default function Page() {
+    return (
+        <StyledDiv>
+        <Typography variant="p">Click it:</Typography>
+        <StyledButton
+            variant="contained"
+            onClick={() => alert("Yeah you did it!")}
+        >
+            Just do it
+        </StyledButton>
+        </StyledDiv>
+    );
+    }
+    ```
+
+You can now start building your app using MUI components and styles.
 
 Congratulations! You have successfully started using MUI in your app. 🎉
